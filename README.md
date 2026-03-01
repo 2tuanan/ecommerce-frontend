@@ -1,12 +1,89 @@
-# React + Vite
+# Frontend Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React-based user interface for Noteshelf with Redux state management, Tailwind CSS styling, and responsive design.
 
-Currently, two official plugins are available:
+## Environment Configuration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Create `.env` file from `.env.example`:
 
-## Expanding the ESLint configuration
+```bash
+cp .env.example .env
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `REACT_APP_PORT` | Frontend app port (for internal use) | `3066` |
+| `REACT_APP_API_URL` | Backend API endpoint | `http://localhost:4088/api` (dev) / `https://example.com/api` (prod) |
+| `REACT_APP_FRONTEND_DOMAIN` | Frontend domain (for redirects) | `http://localhost:3066` (dev) / `https://example.com` (prod) |
+
+### Development Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Copy and configure .env
+cp .env.example .env
+
+# Start development server
+npm start
+```
+
+Browser opens at `http://localhost:3066`
+
+### Production Build
+
+```bash
+npm run build
+```
+
+## Features
+
+- **React** - UI library with hooks
+- **Redux Toolkit** - State management
+- **React Router v7** - Client-side routing
+- **Axios** - HTTP client with baseURL
+- **Tailwind CSS 3** - Utility-first styling
+- **React Hot Toast** - Toast notifications
+- **JWT Decode** - Token parsing for auth
+
+## Pages
+Role-based routing supports separate user and admin dashboards with protected access.
+
+## State Management
+
+Redux Toolkit with async thunks for API calls:
+
+**Auth State:**
+- User login (user/admin)
+- User registration
+- Token management
+- Role-based access
+
+**Notes State:**
+- Get all user notes
+- Create new note
+- Delete note
+
+**Admin State:**
+- Get all users
+- Delete user
+- Reset user notes
+
+## Development
+
+```bash
+npm start              # Start dev server on port 3000
+npm test               # Run test suite
+npm run build          # Production build
+```
+
+## API Integration
+
+Configured Axios instance with:
+- `baseURL`: From `REACT_APP_API_URL`
+- `withCredentials: true` - Enables cookie transmission
+
+All Redux thunks use this configured instance for API calls.
